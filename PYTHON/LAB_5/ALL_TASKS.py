@@ -1,43 +1,49 @@
 import random
+import sys
 
 def get_user_choice():
+    """Запрашивает у пользователя количество камней для взятия (1, 2 или 3) и проверяет ввод."""
     while True:
+        user_input = input("Сколько камней вы хотите взять (1, 2 или 3)?: ")
+        if user_input.upper() == 'Q':
+            sys.exit("Вы вышли из игры.")
         try:
-            choice = int(input("Сколько камней вы хотите взять (1, 2 или 3)? "))
+            choice = int(user_input)
             if choice in [1, 2, 3]:
                 return choice
             else:
                 print("Пожалуйста, выберите 1, 2 или 3.")
         except ValueError:
-            print("Введите число.")
+            print("Ошибка: введите число.")
 
 def computer_choice(remaining):
-    # Логика для того, чтобы оставить сопернику 1 камень
+    """Определяет, сколько камней возьмет компьютер, основываясь на количестве оставшихся камней."""
     if remaining > 4:
-        # Если оставшихся камней больше 4, выбираем так, чтобы оставить 1
-        return (remaining - 1) % 4 or 1  # Оставляем сопернику 1 камень
+        return (remaining - 1) % 4 or 1  # Выбираем так, чтобы оставить 1
     else:
-        # Если осталось 4 или меньше, забираем все, кроме 1
-        return remaining - 1
+        return remaining - 1  # Забираем все, кроме 1
+
+def display_remaining_stones(remaining):
+    """Выводит количество оставшихся камней."""
+    print(f"Осталось камней: {remaining}")
 
 def play_game():
-    N = random.randint(4, 30)
-    n = N
+    """Основная функция для управления игровым процессом."""
+    N = random.randint(4, 31)
+    print("Игра началась! Для выхода введите Q.")
     print("-----------------------------")
-
+    print(f"Начинаем игру с {N} камнями.")
+    
     while N > 0:
-        if n == N:
-            print(f"Начинаем игру с {N} камнями.")
-        else:
-            print(f"Осталось камней: {N}")
-        
         # Ход игрока
         user_take = get_user_choice()
         N -= user_take
+        
         if N <= 0:
             print("Вы забрали последние камни. Компьютер победил!")
             break
-
+        
+        display_remaining_stones(N)
         print("-----------------------------")
 
         # Ход компьютера
@@ -49,6 +55,7 @@ def play_game():
             print("Компьютер забрал последние камни. Вы победили!")
             break
         
+        display_remaining_stones(N)
         print("-----------------------------")
 
 if __name__ == "__main__":
