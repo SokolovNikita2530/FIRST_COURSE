@@ -1,0 +1,17 @@
+lab 1 check
+|-task 1 check
+|-task 2 check
+|-task 3 check
+|-task 4 check
+
+lab 2 check
+|-task 1 check
+|-task 2 check
+|-task 3 check
+|-task 4 check
+
+lab 3 
+|-task 1
+|-task 2 
+|-task 3
+|-task 4
