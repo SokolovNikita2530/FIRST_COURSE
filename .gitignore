@@ -1,1 +1,6 @@
-TEST.py
+TEST.*
+test.*
+lab
+a.out
+index.o
+*.log
