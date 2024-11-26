@@ -18,10 +18,14 @@ def get_user_choice():
 
 def computer_choice(remaining):
     """Определяет, сколько камней возьмет компьютер, основываясь на количестве оставшихся камней."""
-    if remaining > 4:
-        return (remaining - 1) % 4 or 1  # Выбираем так, чтобы оставить 1
+    if remaining > 8:
+        return random.randint(1, 3)
+    elif remaining > 4:
+        return remaining - 5
     else:
-        return remaining - 1  # Забираем все, кроме 1
+        if remaining - 1 == 0:
+            return 1 
+        else: return remaining - 1
 
 def display_remaining_stones(remaining):
     """Выводит количество оставшихся камней."""
