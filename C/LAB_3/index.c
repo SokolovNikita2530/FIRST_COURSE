@@ -243,8 +243,7 @@ int main() {
 		free_list(list);
 		return 1;
 	}
-
-	printf("Удаление всех слов, являющихся перестановками слова: \"%s\"\n", target_word);
+    
 	remove_permutations(&list, target_word);
 
 	// Вывод оставшихся слов в списке
