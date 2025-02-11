@@ -1,21 +1,28 @@
-import math
-
 def gcd(a, b):
-    return math.gcd(a, b)
+    while b:
+        a, b = b, a % b
+    return a
 
 def print_coprime_table(N):
     try:
         N = int(input("Enter the number N: "))
         if N <= 0:
             raise ValueError("N must be a positive number.")
+        
+        print("   ", end="")
         for i in range(1, N+1):
-            row = []
+            print(f"{i:2}", end="")
+        print()
+        
+        for i in range(1, N+1):
+            print(f"{i:2} ", end="")
             for j in range(1, N+1):
                 if gcd(i, j) == 1:
-                    row.append("X")
+                    print(" X", end="")
                 else:
-                    row.append("O")
-            print(" ".join(row))
+                    print(" O", end="")
+            print()
+
     except ValueError as e:
         print(f"Error: {e}")
 
