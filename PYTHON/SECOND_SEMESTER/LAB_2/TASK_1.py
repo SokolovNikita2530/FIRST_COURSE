@@ -3,7 +3,7 @@ import os
 def find_files_by_extension(directory, extension):
     try:
         if not os.path.isdir(directory):
-            raise ValueError("Указанный путь не является директорией")
+            raise ValueError("The specified path is not a directory")
         result = []
         for root, _, files in os.walk(directory):
             for file in files:
@@ -13,11 +13,11 @@ def find_files_by_extension(directory, extension):
             for file_path in result:
                 print(file_path)
         else:
-            print("Файлы с указанным расширением не найдены.")
+            print("No files with the specified extension were found.")
     except Exception as e:
-        print(f"Ошибка: {e}")
+        print(f"Error: {e}")
 
 if __name__ == "__main__":
-    directory = input("Введите путь до директории: ").strip()
-    extension = input("Введите расширение файлов (например, .txt): ").strip()
+    directory = input("Enter the path to the directory: ").strip()
+    extension = input("Enter the file extension (e.g., .txt): ").strip()
     find_files_by_extension(directory, extension)
