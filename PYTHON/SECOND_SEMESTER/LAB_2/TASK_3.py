@@ -1,25 +1,29 @@
 import os
 import shutil
+import zipfile
 
-def move_and_archive_images(src, dst):
+def move_images_and_zip():
     try:
+        src = input("Enter path to source folder: ")
+        dst = input("Enter path to destination folder: ")
+
         if not os.path.isdir(src):
-            raise ValueError("The src path is not a directory")
-        if not os.path.isdir(dst):
+            raise NotADirectoryError("Source path is not a directory.")
+        if not os.path.exists(dst):
             os.makedirs(dst)
-        image_extensions = {'.jpg', '.jpeg', '.png', '.gif', '.bmp', '.tiff'}
+
+        image_exts = {'.jpg', '.jpeg', '.png', '.bmp', '.gif', '.tiff'}
+
         for root, _, files in os.walk(src):
             for file in files:
-                if os.path.splitext(file)[1].lower() in image_extensions:
-                    src_file_path = os.path.join(root, file)
-                    dst_file_path = os.path.join(dst, file)
-                    shutil.move(src_file_path, dst_file_path)
-        archive_path = shutil.make_archive(dst, 'zip', dst)
-        print(f"Archive created at: {archive_path}")
+                if os.path.splitext(file)[1].lower() in image_exts:
+                    src_path = os.path.join(root, file)
+                    shutil.move(src_path, os.path.join(dst, file))
+
+        zip_path = dst + '.zip'
+        shutil.make_archive(dst, 'zip', dst)
+        print(f"Images moved and archived to: {zip_path}")
     except Exception as e:
         print(f"Error: {e}")
 
-if __name__ == "__main__":
-    src = input("Enter the path to the src directory: ").strip()
-    dst = input("Enter the path to the dst directory: ").strip()
-    move_and_archive_images(src, dst)
+move_images_and_zip()
